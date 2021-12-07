@@ -65,13 +65,13 @@ class Game {
       { x: width / 2 - 180, y: height - 5500, image: obstacle2Image }
     ];
 
-    // Adding fuel sprite in the game
+    // Agregando sprite de combustible al juego
     this.addSprites(fuels, 4, fuelImage, 0.02);
 
-    // Adding coin sprite in the game
+    // Agregando sprite de moneda al juego
     this.addSprites(powerCoins, 18, powerCoinImage, 0.09);
 
-    //Adding obstacles sprite in the game
+    //Agregando sprite de obstáculos al juego
     this.addSprites(
       obstacles,
       obstaclesPositions.length,
@@ -108,14 +108,14 @@ class Game {
     form.titleImg.class("gameTitleAfterEffect");
 
     //C39
-    this.resetTitle.html("Reset Game");
+    this.resetTitle.html("Reiniciar juego");
     this.resetTitle.class("resetText");
     this.resetTitle.position(width / 2 + 200, 40);
 
     this.resetButton.class("resetButton");
     this.resetButton.position(width / 2 + 230, 100);
 
-    this.leadeboardTitle.html("Leaderboard");
+    this.leadeboardTitle.html("Puntuación");
     this.leadeboardTitle.class("resetText");
     this.leadeboardTitle.position(width / 3 - 60, 40);
 
@@ -140,13 +140,13 @@ class Game {
       this.showLife();
       this.showLeaderboard();
 
-      //index of the array
+      //índice de la matriz
       var index = 0;
       for (var plr in allPlayers) {
-        //add 1 to the index for every loop
+        //agrega 1 al índice por cada bucle
         index = index + 1;
 
-        //use data form the database to display the cars in x and y direction
+        //utiliza datos de la base de datos para mostrar los autos en las direcciones x e y
         var x = allPlayers[plr].positionX;
         var y = height - allPlayers[plr].positionY;
 
@@ -175,7 +175,7 @@ class Game {
             this.playerMoving = false;
           }
 
-          // Changing camera position in y direction
+          // Cambiar la posición de la cámara en la dirección y
           camera.position.y = cars[index - 1].position.y;
         }
       }
@@ -185,10 +185,10 @@ class Game {
         player.update();
       }
 
-      // handling keyboard events
+      // manejando eventos teclado
       this.handlePlayerControls();
 
-      // Finshing Line
+      // Línea de meta
       const finshLine = height * 6 - 100;
 
       if (player.positionY > finshLine) {
@@ -244,7 +244,7 @@ class Game {
       (players[0].rank === 0 && players[1].rank === 0) ||
       players[0].rank === 1
     ) {
-      // &emsp;    This tag is used for displaying four spaces.
+      // &emsp;    Esta etiqueta se utiliza para mostrar cuatro espacios.
       leader1 =
         players[0].rank +
         "&emsp;" +
@@ -303,15 +303,15 @@ class Game {
   }
 
   handleFuel(index) {
-    // Adding fuel
+    // Agregando combustible
     cars[index - 1].overlap(fuels, function(collector, collected) {
       player.fuel = 185;
-      //collected is the sprite in the group collectibles that triggered
-      //the event
+      //recolectado está el sprite en el grupo de recolectables que desencadenaron
+      //el evento
       collected.remove();
     });
 
-    // Reducing Player car fuel
+    // Reduciendo el combustible del auto del jugador
     if (player.fuel > 0 && this.playerMoving) {
       player.fuel -= 0.3;
     }
@@ -326,8 +326,8 @@ class Game {
     cars[index - 1].overlap(powerCoins, function(collector, collected) {
       player.score += 21;
       player.update();
-      //collected is the sprite in the group collectibles that triggered
-      //the event
+       //recolectado está el sprite en el grupo de recolectables que desencadenaron
+      //el evento
       collected.remove();
     });
   }
@@ -340,7 +340,7 @@ class Game {
         player.positionX -= 100;
       }
 
-      //Reducing Player Life
+      //Reduciendo la vida del jugador
       if (player.life > 0) {
         player.life -= 185 / 4;
       }
@@ -358,7 +358,7 @@ class Game {
           player.positionX -= 100;
         }
 
-        //Reducing Player Life
+        //Reduciendo la vida del jugador
         if (player.life > 0) {
           player.life -= 185 / 4;
         }
@@ -374,7 +374,7 @@ class Game {
           player.positionX -= 100;
         }
 
-        //Reducing Player Life
+        //Reduciendo la vida del jugador
         if (player.life > 0) {
           player.life -= 185 / 4;
         }
@@ -386,8 +386,8 @@ class Game {
 
   showRank() {
     swal({
-      title: `Awesome!${"\n"}Rank${"\n"}${player.rank}`,
-      text: "You reached the finish line successfully",
+      title: `¡Impresionante!${"\n"}Posición${"\n"}${player.rank}`,
+      text: "Llegaste a la meta con éxito",
       imageUrl:
         "https://raw.githubusercontent.com/vishalgaddam873/p5-multiplayer-car-race-game/master/assets/cup.png",
       imageSize: "100x100",
@@ -397,16 +397,16 @@ class Game {
 
   gameOver() {
     swal({
-      title: `Game Over`,
-      text: "Oops you lost the race....!!!",
+      title: `Fin del juego`,
+      text: "¡Ups perdiste la carrera!",
       imageUrl:
         "https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Down_Sign_Emoji_Icon_ios10_grande.png",
       imageSize: "100x100",
-      confirmButtonText: "Thanks For Playing"
+      confirmButtonText: "Gracias por jugar"
     });
   }
 
   end() {
-    console.log("Game Over");
+    console.log("Fin del juego");
   }
 }
